@@ -1,0 +1,1 @@
+# devi-group3-global-living-affordability
