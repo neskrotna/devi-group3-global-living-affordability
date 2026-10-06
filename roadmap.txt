@@ -1,0 +1,81 @@
+Roadmap for Data Engineering project:
+
+1. Finalize the datasets - DONE (all)
+Upload all 3 original datasets to GitHub
+Cost of Living
+Average Annual Wages
+Property Prices
+
+2. Explore the datasets - DONE (gabriela)
+Check columns, number of rows, data types
+Check missing values and duplicates
+Check countries/cities included
+Check years, currencies and units
+Find which countries exist in all 3 datasets
+
+3. Finalize our 3 user stories - DONE (all)
+Each story should connect at least 2 datasets, ideally all 3
+Make sure we have the necessary data to answer each story
+
+4. Define our analytical questions (edy)
+Around 3–5 questions based directly on the user stories
+E.g. income vs. living costs, housing affordability, rent/income ratio, etc.
+
+5. Clean and prepare the data (edy)
+Handle missing values
+Remove/check duplicates
+Check outliers
+Standardize country names/codes
+Standardize data types/units
+Save cleaned data as Parquet
+
+6. Add database storage (baldo)
+Use PostgreSQL or another suitable database
+Create the necessary tables/schema
+Store/read/process data through the database
+
+7. Build the data lake (sveta)
+raw → original datasets
+cleaned → cleaned Parquet files
+business → integrated, analysis-ready data
+
+8. Integrate the 3 datasets
+Join them using countries/country codes
+Deal correctly with city-level vs. country-level data
+Create calculated metrics such as price-to-income and rent-to-income ratios
+
+9. Build the analytical layer with DuckDB
+Query the business-ready Parquet data
+Answer our 3–5 analytical questions
+Produce the final results needed for the dashboard
+
+10. Build the Streamlit dashboard
+Interactive filters and comparisons
+Structure it around the 3 user stories
+Add the most useful charts/KPIs
+
+11. Integrate and test everything
+Make sure the whole pipeline works from raw data → streaming → processing/storage → analytics → dashboard
+Make sure another team member can run it from the README
+
+12. Finish the Jupyter Notebook
+Document the whole process
+Data sources → exploration → cleaning → streaming → storage → integration → DuckDB analysis → results
+Notebook needs to be executed for submission
+
+13. Finish GitHub documentation
+README
+Data sources
+User stories
+Architecture
+Setup/run instructions
+Requirements/dependencies
+
+14. Prepare the 10-minute presentation
+Problem + user stories
+Data sources
+Architecture diagram
+Processing/storage decisions
+Analytical questions + results
+Streamlit dashboard
+Limitations + what we would improve next time
