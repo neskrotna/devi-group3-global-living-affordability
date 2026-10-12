@@ -17,11 +17,15 @@ Find which countries exist in all 3 datasets
 Each story should connect at least 2 datasets, ideally all 3
 Make sure we have the necessary data to answer each story
 
-4. Define our analytical questions (edy)
+4. Define our analytical questions - DONE (edy)
+See docs/analytical_questions.md (5 questions, formulas, inputs and limitations)
 Around 3–5 questions based directly on the user stories
 E.g. income vs. living costs, housing affordability, rent/income ratio, etc.
 
-5. Clean and prepare the data (edy)
+5. Clean and prepare the data - DONE (edy)
+See notebooks/data_preprocessing.ipynb (separate from data_exploration.ipynb)
+Outputs: data/cleaned/*.parquet and quality_report.json
+Run instructions and cleaning decisions: docs/preprocessing.md
 Handle missing values
 Remove/check duplicates
 Check outliers
