@@ -113,7 +113,7 @@ devi-group3-global-living-affordability/
 └── .gitignore
 ```
 
-## Edy's tasks: analytical questions and preprocessing
+## Analytical questions and preprocessing
 
 The [five analytical questions](docs/analytical_questions.md) define the metrics, inputs, and limitations for the student, travelling couple, and family stories. The travel story still needs a suitable second dataset to establish a full trip budget. The current questions scope its available output to selected daily expenses and the remaining budget.
 
