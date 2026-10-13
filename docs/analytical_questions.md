@@ -1,6 +1,6 @@
 # Analytical questions
 
-These five questions implement roadmap task 4 (Edy) and map to the [README user stories](../README.md). They specify future analyses, not completed results.
+These five questions implement roadmap task 4 and map to the [README user stories](../README.md). They specify future analyses, not completed results.
 
 ## Data and comparison rules
 
