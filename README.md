@@ -88,14 +88,25 @@ The dataset contains residential property prices per square meter across differe
 
 ```text
 devi-group3-global-living-affordability/
-│
 ├── data/
 │   └── raw/
-│       ├── cost_of_living/
+│       ├── cost-of-living/
+│       │   ├── cost-of-living.csv
+│       │   └── cost-of-living_v2.csv
 │       ├── income/
-│       └── real_estate/
-│
+│       │   └── export-2026-09-21T08_03_15.042Z.csv
+│       └── real-estate/
+│           └── untera-global-price-per-sqm-2026.csv
+├── db/
+│   ├── install/
+│   │   └── install_postgres.ipynb
+│   └── playground/
+│       ├── create_housing_db_table.ipynb
+│       └── insert_select_gui.ipynb
 ├── notebooks/
-├── src/
+│   └── data_exploration.ipynb
+├── .gitignore
 ├── README.md
-└── .gitignore
+├── requirements.txt
+└── roadmap.txt
+```
