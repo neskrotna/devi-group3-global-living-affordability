@@ -26,7 +26,7 @@ The dataset contains cost-of-living information for cities and countries worldwi
 **Source:** OECD - Average Annual Wages  
 **URL:** https://www.oecd.org/en/data/indicators/average-annual-wages.html
 
-The dataset contains average annual wage information for different countries. For this project, the 2025 values expressed in US dollars and converted using purchasing power parities (PPP) are used.
+The dataset contains average annual wage information for different countries. For this project, the 2025 values expressed in constant US dollars and converted using private-consumption purchasing power parities (PPP) are used. These are gross full-time-equivalent wages, not net salaries. They must not be used directly as denominators for nominal USD costs.
 
 **Geographical level:** Country  
 **Reference year:** 2025
@@ -42,7 +42,7 @@ For this project, we use:
 
 `untera-global-price-per-sqm-2026.csv`
 
-The dataset contains residential property prices per square meter across different countries.
+The dataset contains median residential asking prices per square meter across different countries, from the publisher's June 2026 snapshot. These are national listing benchmarks, not city-specific transaction prices.
 
 **Geographical level:** Country  
 **Reference year:** 2026
@@ -89,24 +89,66 @@ The dataset contains residential property prices per square meter across differe
 ```text
 devi-group3-global-living-affordability/
 ├── data/
-│   └── raw/
-│       ├── cost-of-living/
-│       │   ├── cost-of-living.csv
-│       │   └── cost-of-living_v2.csv
-│       ├── income/
-│       │   └── export-2026-09-21T08_03_15.042Z.csv
-│       └── real-estate/
-│           └── untera-global-price-per-sqm-2026.csv
-├── db/
-│   ├── install/
-│   │   └── install_postgres.ipynb
-│   └── playground/
-│       ├── create_housing_db_table.ipynb
-│       └── insert_select_gui.ipynb
+│   ├── raw/                         # Original CSV files, unchanged
+│   │   ├── cost-of-living/
+│   │   ├── income/
+│   │   └── real-estate/
+│   └── cleaned/                     # Three Parquet tables + quality flags/report
+│
 ├── notebooks/
-│   └── data_exploration.ipynb
-├── .gitignore
-├── README.md
+│   ├── data_exploration.ipynb
+│   ├── data_preprocessing.ipynb     # Separate, executed preprocessing notebook
+│   └── install_dependencies.ipynb   # Install into the selected notebook kernel
+├── src/                            # Shared cleaning functions and country mapping
+├── tests/                          # Country mapping and preprocessing checks
+├── docs/
+│   ├── analytical_questions.md
+│   └── preprocessing.md
+├── db/                             # Existing PostgreSQL setup/playground notebooks
+├── install_dependencies.py         # Install requirements using the current Python
 ├── requirements.txt
-└── roadmap.txt
+├── roadmap.txt
+├── README.md
+└── .gitignore
 ```
+
+## Analytical questions and preprocessing
+
+The [five analytical questions](docs/analytical_questions.md) define the metrics, inputs, and limitations for the student, travelling couple, and family stories. The travel story still needs a suitable second dataset to establish a full trip budget. The current questions scope its available output to selected daily expenses and the remaining budget.
+
+The new [data preprocessing notebook](notebooks/data_preprocessing.ipynb) prepares the selected cost-of-living version 2, OECD wages, and property prices. It is separate from the exploration notebook and includes executed quality checks and Parquet read-back verification. The [preprocessing guide](docs/preprocessing.md) describes the output schemas and handoff to storage/integration.
+
+### Setup and run
+
+Use Python 3.11–3.13. Each teammate can use their own existing Python installation. The installer uses the selected kernel's Python, so no shared environment name or machine-specific path is needed.
+
+1. Open [install_dependencies.ipynb](notebooks/install_dependencies.ipynb), select an available Python kernel, and click **Run All**. It installs `requirements.txt` into that kernel's Python.
+2. Open [data_preprocessing.ipynb](notebooks/data_preprocessing.ipynb) and select the **same Python kernel**.
+3. **Restart Kernel**, then click **Run All**.
+
+Alternatively, from the repository root in a terminal:
+
+```powershell
+python install_dependencies.py
+python -m jupyterlab
+```
+
+In JupyterLab, open `notebooks/data_preprocessing.ipynb` and click **Run All**.
+
+To generate the same outputs without Jupyter:
+
+```powershell
+python -m src.preprocessing
+```
+
+The command accepts `--raw-dir` and `--output-dir` for other data-lake locations. It writes `cost_of_living.parquet`, `income.parquet`, `property_prices.parquet`, `quality_flags.parquet`, and `quality_report.json` under `data/cleaned` by default. A rerun replaces these generated files. Original CSVs are preserved.
+
+The supplied data produces 4,956 city rows, 34 country wage rows (excluding the OECD aggregate), and 62 country property rows. There are 23 country codes shared by all three. Missing values and statistical outliers are retained and documented. City cost dates stay unknown; the PPP/nominal distinction and national/city geography must remain explicit in later analyses.
+
+Run the regression checks with:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+These check country aliases and ambiguous Congo records, missing versus zero values, duplicates, invalid numbers, units, Parquet round trips, unchanged raw files, and reproducible exports. Database integration, the business layer, DuckDB analysis, and the dashboard remain later roadmap tasks.
