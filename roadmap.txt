@@ -1,85 +1,516 @@
-Roadmap for Data Engineering project:
+ROADMAP – DATA ENGINEERING PROJECT
+Global Living Affordability
+Group 3
 
-1. Finalize the datasets - DONE (all)
-Upload all 3 original datasets to GitHub
-Cost of Living
-Average Annual Wages
-Property Prices
+Team members:
+- Gabriela
+- Edy
+- Baldo
+- Sveta
 
-2. Explore the datasets - DONE (gabriela)
-Check columns, number of rows, data types
-Check missing values and duplicates
-Check countries/cities included
-Check years, currencies and units
-Find which countries exist in all 3 datasets
+STATUS:
+- DONE: Completed
+- PARTIAL: Started but not fully implemented
+- TODO: Not yet implemented
 
-3. Finalize our 3 user stories - DONE (all)
-Each story should connect at least 2 datasets, ideally all 3
-Make sure we have the necessary data to answer each story
+==================================================
+PHASE 1 – DATA ACQUISITION AND PREPARATION
+==================================================
 
-4. Define our analytical questions - DONE (edy)
-See docs/analytical_questions.md (5 questions, formulas, inputs and limitations)
-Around 3–5 questions based directly on the user stories
-E.g. income vs. living costs, housing affordability, rent/income ratio, etc.
+1. Finalize the datasets
+STATUS: DONE
+RESPONSIBLE: All team members
 
-5. Clean and prepare the data - DONE (edy)
-See notebooks/data_preprocessing.ipynb (separate from data_exploration.ipynb)
-Outputs: data/cleaned/*.parquet and quality_report.json
-Run instructions and cleaning decisions: docs/preprocessing.md
-Handle missing values
-Remove/check duplicates
-Check outliers
-Standardize country names/codes
-Standardize data types/units
-Save cleaned data as Parquet
+- Select the project topic.
+- Identify suitable data sources.
+- Upload the original datasets to GitHub.
+- Preserve the original raw files.
+- Document data sources and licenses.
 
-6. Add database storage (baldo)
-Use PostgreSQL or another suitable database
-Create the necessary tables/schema
-Store/read/process data through the database
+Datasets:
+- Global Cost of Living
+- OECD Average Annual Wages
+- Global Property Prices
 
-7. Build the data lake (sveta)
-raw → original datasets
-cleaned → cleaned Parquet files
-business → integrated, analysis-ready data
 
-8. Integrate the 3 datasets
-Join them using countries/country codes
-Deal correctly with city-level vs. country-level data
-Create calculated metrics such as price-to-income and rent-to-income ratios
+2. Explore the datasets
+STATUS: DONE
+RESPONSIBLE: Gabriela
 
-9. Build the analytical layer with DuckDB
-Query the business-ready Parquet data
-Answer our 3–5 analytical questions
-Produce the final results needed for the dashboard
+- Check columns, number of rows and data types.
+- Check missing values and duplicates.
+- Compare both Cost of Living dataset versions.
+- Select the most suitable dataset version.
+- Explore geographical coverage.
+- Document variable definitions.
+- Check years, currencies and units.
+- Identify potential outliers and data-quality issues.
+- Identify country naming inconsistencies.
+- Document findings and limitations.
 
-10. Build the Streamlit dashboard
-Interactive filters and comparisons
-Structure it around the 3 user stories
-Add the most useful charts/KPIs
+Output:
+- notebooks/data_exploration.ipynb
 
-11. Integrate and test everything
-Make sure the whole pipeline works from raw data → streaming → processing/storage → analytics → dashboard
-Make sure another team member can run it from the README
 
-12. Finish the Jupyter Notebook
-Document the whole process
-Data sources → exploration → cleaning → streaming → storage → integration → DuckDB analysis → results
-Notebook needs to be executed for submission
+3. Finalize the three user stories
+STATUS: DONE
+RESPONSIBLE: All team members
+REVISION: Gabriela
 
-13. Finish GitHub documentation
-README
-Data sources
-User stories
-Architecture
-Setup/run instructions
-Requirements/dependencies
+- Define three user stories related to living affordability.
+- Connect each user story to at least two datasets.
+- Verify whether the available data supports each story.
+- Replace the original travel scenario with a relocation scenario.
 
-14. Prepare the 10-minute presentation
-Problem + user stories
-Data sources
-Architecture diagram
-Processing/storage decisions
-Analytical questions + results
-Streamlit dashboard
-Limitations + what we would improve next time
+Final user stories:
+- Student comparing affordable places to live.
+- Young professional relocating within Europe.
+- Family considering buying a home in Vienna.
+
+Output:
+- README.md
+
+
+4. Define and update the analytical questions
+STATUS: PARTIAL – Initial questions completed
+RESPONSIBLE: Edy
+
+Completed:
+- Define five analytical questions.
+- Connect questions to the user stories.
+- Document formulas, inputs and limitations.
+
+Remaining:
+- Update analytical question 3 according to the revised User Story 2.
+- Define a standardized basket of selected monthly living expenses.
+- Confirm the required metrics and analytical outputs.
+- Verify that all questions are supported by the available data.
+
+Output:
+- docs/analytical_questions.md
+
+
+5. Clean and prepare the data
+STATUS: DONE
+RESPONSIBLE: Edy
+
+- Handle missing and invalid values.
+- Check and remove exact duplicates.
+- Identify and flag potential outliers.
+- Standardize country names and country codes.
+- Rename variables using descriptive column names.
+- Standardize data types.
+- Preserve units and reference years.
+- Exclude the OECD aggregate from country-level analysis.
+- Preserve source information and data provenance.
+- Export cleaned datasets as Parquet.
+- Generate a data-quality report.
+- Implement preprocessing and country normalization tests.
+- Identify common countries across the three datasets.
+
+Results:
+- 4,956 Cost of Living records
+- 34 individual-country income records
+- 62 property-price records
+- 23 common country codes
+
+Outputs:
+- notebooks/data_preprocessing.ipynb
+- src/preprocessing.py
+- src/countries.py
+- src/cost_columns.py
+- data/cleaned/*.parquet
+- data/cleaned/quality_report.json
+- docs/preprocessing.md
+- tests/
+
+
+==================================================
+PHASE 2 – PIPELINE ARCHITECTURE AND INFRASTRUCTURE
+==================================================
+
+6. Finalize the project architecture
+STATUS: TODO
+RESPONSIBLE: Gabriela and Edy
+
+- Define the complete end-to-end data pipeline.
+- Agree on the technologies used.
+- Define the purpose of each storage layer.
+- Agree on database tables and join keys.
+- Agree on the business-ready data schema.
+- Define the interface between data engineering and analytics.
+- Create an architecture diagram.
+
+Proposed technologies:
+- Python
+- Pandas
+- Apache Spark Structured Streaming
+- PostgreSQL
+- Apache Parquet
+- DuckDB
+- Streamlit
+- Docker Compose
+- Jupyter Notebook
+
+Outputs:
+- docs/architecture.md
+- Architecture diagram
+
+
+7. Add PostgreSQL database storage
+STATUS: PARTIAL
+PREVIOUS CONTRIBUTION: Baldo
+RESPONSIBLE FOR COMPLETION: Gabriela
+
+Completed:
+- PostgreSQL installation notebook.
+- Experimental database creation.
+- Experimental SQL operations.
+- Database GUI playground.
+
+Remaining:
+- Set up a reproducible PostgreSQL environment.
+- Configure PostgreSQL using Docker Compose.
+- Remove hardcoded database credentials.
+- Configure credentials through environment variables.
+- Create project-specific database tables.
+- Define primary keys and appropriate constraints.
+- Implement database connection handling.
+- Store actual project data instead of synthetic housing records.
+- Implement reliable insert/update operations.
+- Prevent duplicate records when the pipeline is rerun.
+- Verify stored records using SQL queries.
+- Document database setup and usage.
+
+Expected outputs:
+- docker-compose.yml
+- .env.example
+- Database schema
+- Database connection module
+- Database ingestion module
+- Executed database verification
+
+
+8. Implement simulated data streaming
+STATUS: TODO
+RESPONSIBLE: Gabriela
+
+- Set up Apache Spark and PySpark.
+- Define the structure of incoming records.
+- Simulate a real-time stream using existing dataset records.
+- Replay Cost of Living records in batches.
+- Use Spark Structured Streaming to process incoming records.
+- Validate incoming records.
+- Handle missing or invalid records.
+- Enrich incoming records with country-level reference data where appropriate.
+- Store processed records in PostgreSQL.
+- Write processed outputs to the appropriate data lake zone.
+- Configure streaming checkpoints.
+- Verify that streaming works across multiple batches.
+- Test pipeline restart and duplicate prevention.
+- Document the streaming process.
+
+Expected outputs:
+- Streaming producer or replay script
+- Spark streaming processing module
+- Streaming checkpoints
+- Processed database records
+- Streaming execution documentation
+
+Note:
+Spark Structured Streaming is sufficient for the mandatory streaming requirement. Kafka is optional and will only be added if needed.
+
+
+==================================================
+PHASE 3 – DATA LAKE AND INTEGRATION
+==================================================
+
+9. Complete the data lake
+STATUS: PARTIAL
+RESPONSIBLE: Gabriela and Edy
+
+Completed:
+- Raw data zone
+- Cleaned data zone
+- Cleaned Parquet files
+- Data-quality report
+
+Remaining:
+- Define the business data zone.
+- Define storage and file naming conventions.
+- Preserve source information and metadata.
+- Connect streaming outputs to the data lake.
+- Store integrated, analysis-ready datasets as Parquet.
+- Verify that all generated files are reproducible.
+
+Data lake structure:
+
+data/
+    raw/
+        cost-of-living/
+        income/
+        real-estate/
+    cleaned/
+    business/
+
+Responsibilities:
+- Gabriela: Streaming outputs and storage integration.
+- Edy: Business-ready datasets and analytical schema.
+
+
+10. Integrate the three datasets
+STATUS: TODO
+RESPONSIBLE: Edy
+
+- Load the cleaned Parquet datasets.
+- Join datasets using standardized country codes.
+- Validate many-to-one relationships between cities and countries.
+- Preserve city-level and country-level information.
+- Verify the 23 common country codes.
+- Define inclusion and exclusion rules for each analysis.
+- Avoid unintended duplication of country-level observations.
+- Preserve source dates, units and data-quality indicators.
+- Calculate the required affordability metrics.
+- Create business-ready analytical tables.
+- Export integrated datasets as Parquet.
+
+Potential metrics:
+- Monthly rent-to-net-income ratio
+- Selected monthly living expenses
+- Remaining income after selected expenses
+- Estimated property purchase price
+- Property price-to-annual-net-income multiple
+- One-earner and two-earner household scenarios
+
+Important:
+Nominal USD prices must not be divided by OECD PPP-adjusted gross wages. City-level net salaries should be used for compatible affordability calculations. OECD wages and national property prices provide additional country-level context.
+
+Expected outputs:
+- Data integration module
+- Business-ready Parquet files
+- Integration validation results
+- Documented analytical schema
+
+
+==================================================
+PHASE 4 – ANALYTICS AND VISUALIZATION
+==================================================
+
+11. Build the analytical layer with DuckDB
+STATUS: TODO
+RESPONSIBLE: Edy
+
+- Configure DuckDB.
+- Load business-ready Parquet datasets.
+- Implement SQL queries for all five analytical questions.
+- Calculate the required affordability metrics.
+- Apply consistent filtering and eligibility rules.
+- Validate query results.
+- Document formulas and assumptions.
+- Produce analytical tables for the dashboard.
+- Document answers to the analytical questions.
+
+Expected outputs:
+- DuckDB analytical queries
+- Analytical notebook or Python module
+- Analytical results
+- Documented answers to all five questions
+
+
+12. Build the interactive Streamlit dashboard
+STATUS: TODO
+RESPONSIBLE: Edy
+
+- Connect Streamlit to the analytical layer.
+- Create a clear dashboard structure.
+- Organize visualizations around the three user stories.
+- Implement interactive country and city filters.
+- Display relevant KPIs.
+- Implement comparison tables and charts.
+- Display currencies, units and reference years.
+- Display relevant data-quality information.
+- Explain assumptions and limitations.
+- Handle missing data appropriately.
+- Test dashboard functionality.
+
+Proposed dashboard sections:
+- Global Overview
+- Student Affordability
+- Young Professional Relocation
+- Family and Home Ownership
+- Data Sources and Limitations
+
+Expected outputs:
+- Streamlit application
+- Interactive visualizations
+- Dashboard run instructions
+
+
+==================================================
+PHASE 5 – INTEGRATION, TESTING AND DOCUMENTATION
+==================================================
+
+13. Integrate and test the complete pipeline
+STATUS: TODO
+RESPONSIBLE: Gabriela and Edy
+
+- Verify the complete end-to-end data flow.
+- Test preprocessing.
+- Run existing automated tests.
+- Test simulated streaming.
+- Test PostgreSQL storage.
+- Test data integration.
+- Validate business-ready Parquet outputs.
+- Test DuckDB queries.
+- Test Streamlit functionality.
+- Verify country join relationships.
+- Verify calculated metrics.
+- Check for unintended duplicate records.
+- Test pipeline restart and reproducibility.
+- Verify that another team member is able to run the project.
+- Fix identified bugs.
+
+Expected end-to-end pipeline:
+
+Raw data
+    -> Data preprocessing
+    -> Cleaned data
+    -> Simulated Spark streaming
+    -> Processing and integration
+    -> PostgreSQL / Business-ready Parquet
+    -> DuckDB analytics
+    -> Streamlit dashboard
+
+
+14. Finish the executed Jupyter Notebook documentation
+STATUS: PARTIAL
+RESPONSIBLE: Gabriela and Edy
+
+Completed:
+- Data exploration notebook
+- Data preprocessing notebook
+
+Remaining:
+- Document the complete pipeline architecture.
+- Document simulated streaming.
+- Document PostgreSQL storage.
+- Document data integration.
+- Document DuckDB analytical queries.
+- Include analytical results and visualizations.
+- Document assumptions and limitations.
+- Prepare a final executed notebook covering the complete workflow.
+- Verify that all relevant notebook cells execute successfully.
+
+Responsibilities:
+- Gabriela: Architecture, streaming and database documentation.
+- Edy: Integration, analytics and visualization documentation.
+
+
+15. Finalize GitHub documentation
+STATUS: PARTIAL
+RESPONSIBLE: Gabriela and Edy
+
+Completed:
+- Initial README
+- Data source documentation
+- User stories
+- Analytical question documentation
+- Preprocessing documentation
+- Initial dependencies
+- Project roadmap
+
+Remaining:
+- Update project architecture.
+- Document the final repository structure.
+- Document all technologies used.
+- Update requirements.txt.
+- Document environment configuration.
+- Document database setup.
+- Document streaming execution.
+- Document analytical layer execution.
+- Document dashboard execution.
+- Add complete setup and run instructions.
+- Document automated testing.
+- Document data sources and licenses.
+- Document known limitations.
+- Verify that no passwords or secrets are committed.
+- Document individual team contributions.
+
+
+==================================================
+PHASE 6 – FINAL PRESENTATION AND SUBMISSION
+==================================================
+
+16. Prepare the 10-minute presentation
+STATUS: TODO
+RESPONSIBLE: Gabriela and Edy
+
+Presentation content:
+- Project topic and motivation
+- Three user stories
+- Data sources
+- Data exploration and data quality
+- End-to-end architecture diagram
+- Simulated streaming
+- Database and storage decisions
+- Data integration
+- Analytical questions and results
+- Streamlit dashboard demonstration
+- Project limitations
+- Future improvements
+- Individual contributions
+
+Proposed presentation division:
+- Gabriela: Project introduction, architecture, streaming and database.
+- Edy: Data preprocessing, integration, analytics and dashboard.
+- Both: Limitations and future improvements.
+
+
+17. Final submission checklist
+STATUS: TODO
+RESPONSIBLE: Gabriela and Edy
+
+- Verify all mandatory assignment requirements.
+- Execute the complete pipeline.
+- Verify the final notebook documentation.
+- Verify that the GitHub repository is complete.
+- Verify that setup instructions work.
+- Verify that the dashboard works.
+- Prepare the final presentation.
+- Rehearse the presentation.
+- Submit all required deliverables.
+
+
+==================================================
+SUMMARY OF REMAINING RESPONSIBILITIES
+==================================================
+
+Gabriela:
+- Pipeline architecture
+- PostgreSQL
+- Docker Compose
+- Simulated Spark streaming
+- Database ingestion
+- Streaming storage integration
+- Engineering documentation
+- Pipeline testing
+
+Edy:
+- Update analytical questions
+- Business-ready data schema
+- Data integration
+- Affordability metrics
+- DuckDB analytical layer
+- Streamlit dashboard
+- Analytical documentation
+- Analytical validation
+
+Together:
+- Final architecture decisions
+- Data lake completion
+- End-to-end integration
+- Testing
+- Final notebook
+- GitHub documentation
+- Presentation
+- Submission

@@ -61,15 +61,16 @@ The dataset contains median residential asking prices per square meter across di
 
 ---
 
-### User Story 2: Couple Travelling in Europe
+### User Story 2: Young Professional Relocating Within Europe
 
-> As a couple planning a one-month trip through Europe, we want to compare the costs across different European cities so that we can choose four cities to visit while staying within a budget of $10,000.
+> As a young professional planning to relocate within Europe, I want to compare living expenses, average salaries, and property prices across different locations so that I can choose an affordable place to live and potentially buy a home in the future.
 
 **Datasets used:**
 - Global Cost of Living
-- Additional dataset connection to be finalized
+- Average Annual Wages
+- Global Property Prices
 
-**Note:** Flight prices from New York are currently outside the scope of the selected datasets and will only be included if an appropriate free data source is added.
+**Note:** Affordability calculations are based on city-level net salaries and living expenses. National PPP-adjusted wages and property prices are used as additional comparison indicators.
 
 ---
 
